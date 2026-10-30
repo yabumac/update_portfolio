@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-base: #14131a;
+  --color-surface: #1e1c26;
+  --color-surface-2: #262330;
+  --color-amber: #f2a93b;
+  --color-violet: #7a5cff;
+  --color-text: #f3f1ec;
+  --color-muted: #9a96a6;
+  --color-line: #2c2936;
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+:root {
+  --base: #14131a;
+  --surface: #1e1c26;
+  --surface-2: #262330;
+  --amber: #f2a93b;
+  --violet: #7a5cff;
+  --text: #f3f1ec;
+  --muted: #9a96a6;
+  --line: #2c2936;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+/* The one orchestrated entrance: a thin level meter filling in. */
+@keyframes meter-fill {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.meter-fill {
+  animation: meter-fill 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.2s;
+}
+
+@keyframes readout-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.readout-in {
+  animation: readout-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meter-fill,
+  .readout-in {
+    animation: none;
+  }
+}
+
+/* Timeline lane dot: one quick pulse when a milestone is reached while scrolling. */
+@keyframes dot-blink {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.45);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dot-blink {
+  animation: dot-blink 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot-blink {
+    animation: none;
+  }
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--amber);
+  color: #14131a;
+}
