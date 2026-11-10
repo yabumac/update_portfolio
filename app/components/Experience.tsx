@@ -67,7 +67,7 @@ export default function Experience() {
         const dot = el.querySelector<HTMLElement>("[data-dot]");
         if (!dot) continue;
         dot.style.opacity = String(0.2 + 0.8 * progress);
-        dot.classList.toggle("dot-blink", progress >= 0.985);
+        // dot progress synced without blink
       }
     };
 

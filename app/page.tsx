@@ -7,19 +7,24 @@ import Languages from "./components/Languages";
 import References from "./components/References";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import BottomLeftAura from "./components/BottomLeftAura";
+import { ReactiveColorProvider } from "./context/ReactiveColorContext";
 
 export default function Home() {
   return (
-    <main id="top" className="flex-1">
-      <Hero />
-      <Systems />
-      <Experience />
-      <Skills />
-      <Impact />
-      <Languages />
-      <References />
-      <Contact />
-      <Footer />
-    </main>
+    <ReactiveColorProvider>
+      <main id="top" className="flex-1 relative">
+        <Hero />
+        <Systems />
+        <Experience />
+        <Skills />
+        <Impact />
+        <Languages />
+        <References />
+        <Contact />
+        <Footer />
+        <BottomLeftAura />
+      </main>
+    </ReactiveColorProvider>
   );
 }

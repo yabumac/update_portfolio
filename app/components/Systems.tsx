@@ -46,7 +46,7 @@ function Module({ project }: { project: Project }) {
       {...(project.url
         ? { href, target: "_blank", rel: "noopener noreferrer" }
         : {})}
-      className="group block border border-line bg-surface p-5 transition-colors hover:border-[#3a3544]"
+      className="group block border border-line bg-surface p-5 transition-colors hover:border-amber/50"
     >
       <div className="mb-3 flex items-center justify-between gap-3">
         <h3 className="font-display text-lg font-semibold text-text">

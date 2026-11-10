@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-base: #14131a;
-  --color-surface: #1e1c26;
-  --color-surface-2: #262330;
-  --color-amber: #f2a93b;
-  --color-violet: #7a5cff;
-  --color-text: #f3f1ec;
-  --color-muted: #9a96a6;
-  --color-line: #2c2936;
+  --color-base: var(--base);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-amber: var(--amber);
+  --color-violet: var(--violet);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
@@ -24,10 +24,33 @@
   --text: #f3f1ec;
   --muted: #9a96a6;
   --line: #2c2936;
+  --glass-bg: rgba(30, 28, 38, 0.75);
+  --glass-border: rgba(242, 169, 59, 0.18);
+  --mirror-bg: rgba(20, 19, 26, 0.65);
+  --glow-amber: rgba(242, 169, 59, 0.25);
+  color-scheme: dark;
+}
+
+[data-theme="light"],
+.light {
+  --base: #faf6f0;
+  --surface: #f3ede2;
+  --surface-2: #e7dfd1;
+  --amber: #b87314;
+  --violet: #6848d7;
+  --text: #281e17;
+  --muted: #7c6e62;
+  --line: #ddd3c3;
+  --glass-bg: rgba(243, 237, 226, 0.85);
+  --glass-border: rgba(184, 115, 20, 0.25);
+  --mirror-bg: rgba(250, 246, 240, 0.75);
+  --glow-amber: rgba(184, 115, 20, 0.22);
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,6 +61,9 @@ html {
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
+  background-color: var(--base);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .font-display {
@@ -83,27 +109,49 @@ body {
   }
 }
 
-/* Timeline lane dot: one quick pulse when a milestone is reached while scrolling. */
-@keyframes dot-blink {
-  0% {
-    transform: scale(1);
-  }
-  35% {
-    transform: scale(1.45);
-  }
-  100% {
-    transform: scale(1);
-  }
+
+
+/* Scroll reveal helper classes */
+.reveal-init {
+  opacity: 0.08;
+  transform: translateY(28px);
+  filter: blur(4px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
 }
 
-.dot-blink {
-  animation: dot-blink 0.5s ease-out;
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dot-blink {
-    animation: none;
+  .reveal-init {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
+}
+
+/* Smokey mirror glass reflections */
+.smokey-mirror {
+  background: var(--mirror-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 20px 0 rgba(242, 169, 59, 0.05);
+}
+
+[data-theme="light"] .smokey-mirror,
+.light .smokey-mirror {
+  box-shadow: 0 20px 40px -10px rgba(40, 30, 23, 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 0 20px 0 rgba(184, 115, 20, 0.04);
 }
 
 /* Visible keyboard focus everywhere */
@@ -114,5 +162,5 @@ body {
 
 ::selection {
   background: var(--amber);
-  color: #14131a;
+  color: var(--base);
 }
