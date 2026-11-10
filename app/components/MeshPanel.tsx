@@ -179,15 +179,15 @@ export default function MeshPanel() {
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           if (c < cols - 1) {
-            drawSegment(r, c, r, c + 1);
+            drawSegment(ctx, r, c, r, c + 1);
           }
           if (r < rows - 1) {
-            drawSegment(r, c, r + 1, c);
+            drawSegment(ctx, r, c, r + 1, c);
           }
         }
       }
 
-      function drawSegment(r1: number, c1: number, r2: number, c2: number) {
+      function drawSegment(c2d: CanvasRenderingContext2D, r1: number, c1: number, r2: number, c2: number) {
         const x1 = px[r1][c1];
         const y1 = py[r1][c1];
         const x2 = px[r2][c2];
@@ -201,7 +201,7 @@ export default function MeshPanel() {
           r1 === pulseRow &&
           Math.abs(c1 - pulseCol) < 1.4;
 
-        ctx.save();
+        c2d.save();
 
         if (out) {
           // BREAKOUT LINE: outside the box in the smoky background
@@ -212,16 +212,16 @@ export default function MeshPanel() {
             ? "rgba(184,115,20,"
             : "rgba(214,149,78,";
 
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = `${blurColor}0.5)`;
-          ctx.strokeStyle = `${blurColor}0.75)`;
-          ctx.lineWidth = 1.2;
+          c2d.shadowBlur = 8;
+          c2d.shadowColor = `${blurColor}0.5)`;
+          c2d.strokeStyle = `${blurColor}0.75)`;
+          c2d.lineWidth = 1.2;
         } else if (isPulse) {
           // Rare subtle color pulse inside the wireframe
           const pop = (Math.floor(slow / pulsePeriod) % 2 === 0) ? RARE_VIOLET : RARE_CYAN;
-          ctx.shadowBlur = 0;
-          ctx.strokeStyle = `rgba(${pop.r},${pop.g},${pop.b},0.8)`;
-          ctx.lineWidth = 1.2;
+          c2d.shadowBlur = 0;
+          c2d.strokeStyle = `rgba(${pop.r},${pop.g},${pop.b},0.8)`;
+          c2d.lineWidth = 1.2;
         } else {
           // STANDARD WIREFRAME: 100% crisp 1px line, zero blur, dominant gold
           const red = Math.round(dark[0] + (lit[0] - dark[0]) * lm);
@@ -229,16 +229,16 @@ export default function MeshPanel() {
           const blue = Math.round(dark[2] + (lit[2] - dark[2]) * lm);
           const alpha = 0.35 + 0.6 * lm;
 
-          ctx.shadowBlur = 0;
-          ctx.strokeStyle = `rgba(${red},${green},${blue},${alpha.toFixed(2)})`;
-          ctx.lineWidth = 1;
+          c2d.shadowBlur = 0;
+          c2d.strokeStyle = `rgba(${red},${green},${blue},${alpha.toFixed(2)})`;
+          c2d.lineWidth = 1;
         }
 
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-        ctx.restore();
+        c2d.beginPath();
+        c2d.moveTo(x1, y1);
+        c2d.lineTo(x2, y2);
+        c2d.stroke();
+        c2d.restore();
       }
     };
 

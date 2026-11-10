@@ -134,26 +134,26 @@ export default function HeroShowcase() {
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           if (c < cols - 1) {
-            drawEdge(px[r][c], py[r][c], light[r][c], px[r][c + 1], py[r][c + 1], light[r][c + 1]);
+            drawEdge(ctx, px[r][c], py[r][c], light[r][c], px[r][c + 1], py[r][c + 1], light[r][c + 1]);
           }
           if (r < rows - 1) {
-            drawEdge(px[r][c], py[r][c], light[r][c], px[r + 1][c], py[r + 1][c], light[r + 1][c]);
+            drawEdge(ctx, px[r][c], py[r][c], light[r][c], px[r + 1][c], py[r + 1][c], light[r + 1][c]);
           }
         }
       }
 
-      function drawEdge(x1: number, y1: number, l1: number, x2: number, y2: number, l2: number) {
+      function drawEdge(c2d: CanvasRenderingContext2D, x1: number, y1: number, l1: number, x2: number, y2: number, l2: number) {
         const lm = (l1 + l2) / 2;
         const red = Math.round(dark[0] + (lit[0] - dark[0]) * lm);
         const green = Math.round(dark[1] + (lit[1] - dark[1]) * lm);
         const blue = Math.round(dark[2] + (lit[2] - dark[2]) * lm);
         const alpha = (0.28 + 0.55 * lm).toFixed(2);
 
-        ctx.strokeStyle = `rgba(${red},${green},${blue},${alpha})`;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
+        c2d.strokeStyle = `rgba(${red},${green},${blue},${alpha})`;
+        c2d.beginPath();
+        c2d.moveTo(x1, y1);
+        c2d.lineTo(x2, y2);
+        c2d.stroke();
       }
     };
 
