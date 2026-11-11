@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import HeroShowcase from "./HeroShowcase";
+import HeroHeadline from "./HeroHeadline";
 import ThemeToggle from "./ThemeToggle";
 import HeroBottomBar from "./HeroBottomBar";
 import { useReactiveColor } from "../context/ReactiveColorContext";
@@ -122,7 +123,7 @@ export default function Hero() {
               href="#top"
               className="relative z-10 font-mono text-xs tracking-tight text-muted hover:text-amber transition-colors"
             >
-              yabsera — control room v1.0
+              yabsera _ control room v1.0
             </a>
           </div>
 
@@ -155,13 +156,7 @@ export default function Hero() {
 
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
-            <h1 className="font-display text-5xl font-bold leading-[0.95] tracking-tight text-text sm:text-6xl lg:text-7xl">
-              4,000+ school leaders
-              <br />
-              use what I
-              <br />
-              built.
-            </h1>
+            <HeroHeadline />
 
             <p className="readout-in mt-8 max-w-lg text-lg leading-relaxed text-muted">
               I&apos;m Yabsera Teshome — a tech lead and full-stack/AI developer

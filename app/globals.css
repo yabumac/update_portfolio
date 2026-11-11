@@ -111,6 +111,47 @@ body {
 
 
 
+/* Dreamy flowing gradient animation for first letter */
+@keyframes dreamy-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Call of Duty tactical chromatic glitch */
+@keyframes cod-chromatic {
+  0% {
+    text-shadow: none;
+    transform: translate(0, 0);
+  }
+  20% {
+    text-shadow: -2px 0 var(--amber), 2px 0 var(--violet);
+    transform: translate(-1px, 0.5px);
+  }
+  40% {
+    text-shadow: 2px 0 var(--violet), -2px 0 var(--amber);
+    transform: translate(1px, -0.5px);
+  }
+  60% {
+    text-shadow: -1px 0 var(--amber), 1px 0 var(--violet);
+    transform: translate(0, 0);
+  }
+  100% {
+    text-shadow: none;
+    transform: translate(0, 0);
+  }
+}
+
+.cod-glitch-active {
+  animation: cod-chromatic 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 /* Scroll reveal helper classes */
 .reveal-init {
   opacity: 0.08;
